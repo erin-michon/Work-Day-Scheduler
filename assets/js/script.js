@@ -14,6 +14,59 @@ const currentDay = document.querySelector("#currentDay");
 const timeblock = document.querySelectorAll("[data-hour]");
 const saveBtn = document.querySelectorAll("#saveBtn");
 
+let mySchedule = [
+    {
+        scheduleblock: "block8",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block9",
+        text: ""
+
+    },
+    {
+        scheduleblock: "block10",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block11",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block12",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block13",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block14",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block15",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block16",
+        text: ""
+        
+    },
+    {
+        scheduleblock: "block17",
+        text: ""
+        
+    }
+];
+
 // ** SHOW DATE **
 //On page load, the current date is diplayed in the jumbotron
 let showDate = function() {
@@ -52,11 +105,28 @@ Save the data to local.Storage */
 let saveEdit = function(event) {
     console.log("Save Button Was Clicked!");
 
-    console.log($(event.target.previousElementSibling));
-
     //Get the text content of the correlating .description div
-  
+    let descriptionEl = $(event.target.previousElementSibling);
+
+    console.log(descriptionEl);
+    console.log(descriptionEl[0].innerText);
+    console.log(descriptionEl[0].className);
+
+    let scheduleBlockAr = descriptionEl[0].className.split(" ");
+    scheduleBlockHour = scheduleBlockAr[1];
+
+    console.log(scheduleBlockHour);
     
+    for (let i = 0; i < mySchedule.length; i++) {
+    
+        if (mySchedule[i].scheduleblock === scheduleBlockHour) {
+            console.log("This is my match!");
+            
+        } else {
+            console.log("This is not my match");
+        }
+  
+    }
 
     // if (event.target.matches(".delete-btn")) {
     //     console.log("you clicked a delete button!");
@@ -94,6 +164,10 @@ saveBtn.forEach(item => {
 // ** FUNCTION CALLS **
 showDate();
 timeblockColor();
+
+
+
+
 
 
 
