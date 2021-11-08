@@ -121,8 +121,6 @@ let Edit = function(event) {
 // ** SAVE FUNCTION ** 
 // Saves the newly edited text to local.Storage
 var saveSchedule = function() { 
-    console.log("the save schedule function was called") 
-
     localStorage.setItem("mySchedule", JSON.stringify(mySchedule));
 };
 
@@ -131,6 +129,11 @@ var saveSchedule = function() {
 var loadSchedule = function() {
     //get data from localStorage
     mySchedule = localStorage.getItem("mySchedule", mySchedule);
+
+    //check to see if anyting exists:
+    if (!mySchedule) {
+        return false;
+      }
     
     //turn it back into an object
     mySchedule = JSON.parse(mySchedule);
