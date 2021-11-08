@@ -103,34 +103,35 @@ let timeblockColor = function () {
 /* When the save button is clicked
 Save the data to local.Storage */
 let saveEdit = function(event) {
-    console.log("Save Button Was Clicked!");
 
     //Get the text content of the correlating .description div
     let descriptionEl = $(event.target.previousElementSibling);
 
-    console.log(descriptionEl);
-    console.log(descriptionEl[0].innerText);
-    console.log(descriptionEl[0].className);
-
+    //get the class description from the div that is also in the mySchedule array
     let scheduleBlockAr = descriptionEl[0].className.split(" ");
     scheduleBlockHour = scheduleBlockAr[1];
 
     console.log(scheduleBlockHour);
     
+    //iterate through the mySchedule Array and attach innerText to correlating object
     for (let i = 0; i < mySchedule.length; i++) {
     
         if (mySchedule[i].scheduleblock === scheduleBlockHour) {
-            console.log("This is my match!");
-            
-        } else {
-            console.log("This is not my match");
-        }
-  
+
+             mySchedule[i].text = descriptionEl[0].innerText;
+            console.log(mySchedule[i].text);
+        };
     }
 
-    // if (event.target.matches(".delete-btn")) {
-    //     console.log("you clicked a delete button!");
-    //   }
+    //Call function to save edits to local.Storage
+    saveSchedule();
+
+};
+
+var saveSchedule = function() { 
+    console.log("the save schedule function was called") 
+
+    localStorage.setItem("mySchedule", JSON.stringify(mySchedule));
 };
 
 // Check localStorage upon page load
@@ -139,20 +140,41 @@ let saveEdit = function(event) {
 //convert tasks form string back to array of obj
 //iterates through a tasks array and creates task elements on the page
 
-// var loadTimeblockEvents = function() {
-//     timeblockEvents = localStorage.getItem("timeblockEvents", timeblockEvents);
+var loadSchedule = function() {
+    //get the local storage data
+    mySchedule = localStorage.getItem("mySchedule", mySchedule);
     
+    //turn it back into an object
+    mySchedule = JSON.parse(mySchedule);
 
+    console.log(mySchedule);
+    console.log(mySchedule[0].text);
+    console.log(mySchedule[0].scheduleblock);
 
-//     if (!timeblockEvents) {
-//       timeblockEvents = [];
-//       return false;
-//     }
+    console.log($(timeblock[0]));
+    console.log($(timeblock)[0].classList[1]);
+
+    console.log(mySchedule[0].text);
+    console.log($(timeblock)[0].textContent);
+    
+   
+
+    //iterate through the mySchedule Array and attach innerText to correlating object
+    for (let i = 0; i < mySchedule.length; i++) {
+           
+        if (mySchedule[i].scheduleblock = $(timeblock)[i].classList[1]) {
+
+            console.log("this is my match!")
+
+            $(timeblock)[i].textContent = mySchedule[i].text;
+
+        } else {
+
+            console.log("NO MATCH!")
+        };
+    }
      
-//       timeblockEventIdCounter ++;
-    
-//   };
-
+};    
 
 
 // Add Event Listener for Save Buttons
@@ -161,9 +183,12 @@ saveBtn.forEach(item => {
 });
 
 
+
+
 // ** FUNCTION CALLS **
 showDate();
 timeblockColor();
+loadSchedule();
 
 
 
