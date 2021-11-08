@@ -1,10 +1,6 @@
 /*
 
 ACCEPTANCE CRITERIA
-WHEN I view the time blocks for that day
-THEN each time block is color-coded to indicate whether it is in the past, present, or future
-WHEN I click into a time block
-THEN I can enter an event
 WHEN I click the save button for that time block
 THEN the text for that event is saved in local storage
 WHEN I refresh the page
@@ -12,10 +8,13 @@ THEN the saved events persist
 
 */
 
+// ** PAGE VARIABLES **
 // Define any variables and html elements that need to be pulled/manipulated
-let currentDay = document.querySelector("#currentDay");
-let timeblock = document.querySelectorAll("[data-hour]");
+const currentDay = document.querySelector("#currentDay");
+const timeblock = document.querySelectorAll("[data-hour]");
+const saveBtn = document.querySelectorAll("#saveBtn");
 
+// ** SHOW DATE **
 //On page load, the current date is diplayed in the jumbotron
 let showDate = function() {
 
@@ -26,43 +25,73 @@ let showDate = function() {
     currentDay.textContent = today;
 };
 
+// ** COLOR TIME BLOCKS **
 //Create a function that checks the current time against the timeblock time to determine the background color
 let timeblockColor = function () {
     //Get current time
     let currentHour = moment().hour();
-    console.log(currentHour);
-    
-    console.log(timeblock);
 
+    // iterate through each of these elements, comparing the time
     for (let i = 0; i < timeblock.length; i++) {
-        // console.log(timeblock[i].dataset.hour);
         
+        // Based on the current time, the time block is color-coded to indicate whether it is in the past, present, or future
         if (timeblock[i].dataset.hour == currentHour) {
-            console.log("this is the current time");
             timeblock[i].classList.add("present");
         }
         else if (timeblock[i].dataset.hour > currentHour) {
-            console.log("this is in the future");
             timeblock[i].classList.add("future");
         }
         else if (timeblock[i].dataset.hour < currentHour) {
-            console.log("this is in the past");
             timeblock[i].classList.add("past");
         };
-
     };
-
-    //Compare current hour to the timeblock hour
-    // for (let index = 0; index < array.length; index++) {
-    //     const element = array[index];
-        
-    //     if("data-hour") {
-
-    //     }
-    // }
 };
 
-// Function Calls
+/* When the save button is clicked
+Save the data to local.Storage */
+let saveEdit = function(event) {
+    console.log("Save Button Was Clicked!");
+
+    console.log($(event.target.previousElementSibling));
+
+    //Get the text content of the correlating .description div
+  
+    
+
+    // if (event.target.matches(".delete-btn")) {
+    //     console.log("you clicked a delete button!");
+    //   }
+};
+
+// Check localStorage upon page load
+
+//get task items from localStorage
+//convert tasks form string back to array of obj
+//iterates through a tasks array and creates task elements on the page
+
+// var loadTimeblockEvents = function() {
+//     timeblockEvents = localStorage.getItem("timeblockEvents", timeblockEvents);
+    
+
+
+//     if (!timeblockEvents) {
+//       timeblockEvents = [];
+//       return false;
+//     }
+     
+//       timeblockEventIdCounter ++;
+    
+//   };
+
+
+
+// Add Event Listener for Save Buttons
+saveBtn.forEach(item => {
+    item.addEventListener('click', saveEdit)
+});
+
+
+// ** FUNCTION CALLS **
 showDate();
 timeblockColor();
 
