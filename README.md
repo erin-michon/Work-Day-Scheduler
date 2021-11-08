@@ -22,20 +22,10 @@
 
 ![image info](./assets/images/addevent.JPG)
 
+* A "For Loop" was also utilized to iterate through the local.Storage to ensure that the users saved data is still present upon refreshing the page.
 
 
 ## Deployed Application
 
 * [Work Day Scheduler](https://erin-michon.github.io/Work-Day-Scheduler/)
 
-
-## Future Goals
-* Obtain support and work to complete the full acceptance criteria shown below, as I have it pseudo-coded currently:
-
-        * WHEN I click the save button for that time block
-
-        * THEN the text for that event is saved in local storage
-
-        * WHEN I refresh the page
-
-        * THEN the saved events persist 

@@ -1,13 +1,3 @@
-/*
-
-ACCEPTANCE CRITERIA
-WHEN I click the save button for that time block
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist 
-
-*/
-
 // ** PAGE VARIABLES **
 // Define any variables and html elements that need to be pulled/manipulated
 const currentDay = document.querySelector("#currentDay");
@@ -100,9 +90,9 @@ let timeblockColor = function () {
     };
 };
 
-/* When the save button is clicked
-Save the data to local.Storage */
-let saveEdit = function(event) {
+// ** EDIT FUNCTION ** 
+// Save's the newly edited information into local.Storage - this is triggered by the save button event listener
+let Edit = function(event) {
 
     //Get the text content of the correlating .description div
     let descriptionEl = $(event.target.previousElementSibling);
@@ -128,61 +118,39 @@ let saveEdit = function(event) {
 
 };
 
+// ** SAVE FUNCTION ** 
+// Saves the newly edited text to local.Storage
 var saveSchedule = function() { 
     console.log("the save schedule function was called") 
 
     localStorage.setItem("mySchedule", JSON.stringify(mySchedule));
 };
 
-// Check localStorage upon page load
-
-//get task items from localStorage
-//convert tasks form string back to array of obj
-//iterates through a tasks array and creates task elements on the page
-
+// ** LOAD STORAGE FUNCTION ** 
+// Loads the previously saved edits when the browser is refreshed
 var loadSchedule = function() {
-    //get the local storage data
+    //get data from localStorage
     mySchedule = localStorage.getItem("mySchedule", mySchedule);
     
     //turn it back into an object
     mySchedule = JSON.parse(mySchedule);
-
-    console.log(mySchedule);
-    console.log(mySchedule[0].text);
-    console.log(mySchedule[0].scheduleblock);
-
-    console.log($(timeblock[0]));
-    console.log($(timeblock)[0].classList[1]);
-
-    console.log(mySchedule[0].text);
-    console.log($(timeblock)[0].textContent);
-    
-   
 
     //iterate through the mySchedule Array and attach innerText to correlating object
     for (let i = 0; i < mySchedule.length; i++) {
            
         if (mySchedule[i].scheduleblock = $(timeblock)[i].classList[1]) {
 
-            console.log("this is my match!")
-
             $(timeblock)[i].textContent = mySchedule[i].text;
-
-        } else {
-
-            console.log("NO MATCH!")
         };
     }
      
 };    
 
-
+// ** EVENT LISTENERS **
 // Add Event Listener for Save Buttons
 saveBtn.forEach(item => {
-    item.addEventListener('click', saveEdit)
+    item.addEventListener('click', Edit)
 });
-
-
 
 
 // ** FUNCTION CALLS **
