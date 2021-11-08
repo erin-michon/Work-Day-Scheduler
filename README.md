@@ -4,7 +4,9 @@
 
 * Comments were added to the script.js file as pseudocode and organization purposes.
 
-* The Web API moment.js was utilized to obtain and compare time.
+* The Web API moment.js was utilized to obtain and compare time:
+
+![image info](./assets/images/momentjs.JPG)
 
 * Element blocks for the scheduler were built in HTML and each container were assigned specific classes and id's to link CSS and javaScript to the specific elements:
 
